@@ -2,8 +2,12 @@
 require_once('database.php');
 
 
-$query = '';// PUT YOUR SQL QUERY HERE
-// Example: $query = 'SELECT * FROM customers';
+$query = '
+    SELECT customers.customerID, emailAddress, firstName, lastName, line1, city, state, zipCode, phone 
+    FROM customers
+    INNER JOIN addresses on customers.customerID = addresses.customerID
+    ORDER BY customers.customerID, emailAddress, firstName, lastName, line1, city, state, zipCode, phone ASC
+    ';
 
 $statement = $db->prepare($query);
 $statement->execute();
